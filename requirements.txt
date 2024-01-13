@@ -6,4 +6,4 @@ scikit-learn
 catboost
 xgboost
 
--e .
+#-e .    # comment this down so it don't create a package again and again. Use this only at last to build package
