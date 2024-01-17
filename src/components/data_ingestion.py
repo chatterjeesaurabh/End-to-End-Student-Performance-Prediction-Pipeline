@@ -7,8 +7,11 @@ import pandas as pd
 from sklearn.model_selection import train_test_split
 from dataclasses import dataclass
 
+from src.components.data_transformation import DataTransformation           # for testing 
+from src.components.data_transformation import DataTransformationConfig     # for testing
+
 @dataclass
-class DataIngestionConfig:                                          # a Class which only stores data paths
+class DataIngestionConfig:                                          # *a Class which only stores data paths*
     train_data_path:str = os.path.join("artifacts","train.csv")   # string return type;    # returns 'artifacts\train.csv'
     test_data_path:str = os.path.join("artifacts","test.csv")
     raw_data_path:str = os.path.join("artifacts","data.csv")
@@ -22,7 +25,7 @@ class DataIngestion:
     def initiate_data_ingestion(self):
         logging.info("Entered data ingestion component")    # Logging the step
         try:
-            df = pd.read_csv('notebook\data\stud.csv')      # Reading data
+            df = pd.read_csv('notebook/data/stud.csv')      # Reading data
             logging.info("Read the dataset as dataframe")       # Logging the step
 
             # Create the Directory where data will be stored:
@@ -48,9 +51,14 @@ class DataIngestion:
 
 
 
-if __name__=="__main__":
+if __name__=="__main__":        # testing
     obj=DataIngestion()
-    train_data,test_data=obj.initiate_data_ingestion()
+    train_data,test_data = obj.initiate_data_ingestion()
+
+    print(train_data,test_data)
+
+    data_transformation = DataTransformation()
+    data_transformation.initiate_data_transformation(train_data, test_data)
 
 
 
