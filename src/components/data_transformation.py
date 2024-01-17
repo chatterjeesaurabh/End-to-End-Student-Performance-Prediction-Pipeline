@@ -15,8 +15,8 @@ from src.utils import save_object
 
 
 @dataclass
-class DataTransformationConfig:
-    preprocessor_obj_file_path = os.path.join("artifacts", "preprocessor.pkl")  # 'preprocessor'(column transformer object) needs to be converted into 'PKL' file
+class DataTransformationConfig:         # saving 'preprocessor'(column transformer object): needs to be converted into 'PKL' file
+    preprocessor_obj_file_path = os.path.join("artifacts", "preprocessor.pkl")  
 
 
 class DataTransformation:
@@ -81,7 +81,7 @@ class DataTransformation:
             input_feature_test_df = test_df.drop(columns=[target_column_name], axis=1)  # removing the label column form test set
             target_feature_test_df = test_df[target_column_name]      # label column of test set
 
-            logging.info("applying preprocessing object on train and test dataset")
+            logging.info("applying preprocessing object (data transformers) on train and test dataset")
 
             input_feature_train_arr = preprocessing_obj.fit_transform(input_feature_train_df)  # apply "FIT_TRANSFORM" to **TRAIN data
             input_feature_test_arr = preprocessing_obj.transform(input_feature_test_df)        # apply "TRANSFORM" to **TEST data
@@ -94,7 +94,7 @@ class DataTransformation:
 
 
             #'preprocessor' needs to be converted into 'PKL' file:
-            save_object(                                                    # definition in: **'utils.py'
+            save_object(        # saves the 'preprocessing' object as 'PKL' file  (definition in: **'utils.py')
                 file_path = self.data_transformation_config.preprocessor_obj_file_path,
                 obj = preprocessing_obj
             )

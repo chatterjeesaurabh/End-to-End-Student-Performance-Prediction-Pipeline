@@ -7,8 +7,11 @@ import pandas as pd
 from sklearn.model_selection import train_test_split
 from dataclasses import dataclass
 
-from src.components.data_transformation import DataTransformation           # for testing 
-from src.components.data_transformation import DataTransformationConfig     # for testing
+from src.components.data_transformation import DataTransformation           # for testing data-transformation
+from src.components.data_transformation import DataTransformationConfig     # for testing data-transformation
+
+from src.components.model_trainer import ModelTrainerConfig         # for testing model-trainer
+from src.components.model_trainer import ModelTrainer               # for testing model-trainer
 
 @dataclass
 class DataIngestionConfig:                                          # *a Class which only stores data paths*
@@ -55,10 +58,11 @@ if __name__=="__main__":        # testing
     obj=DataIngestion()
     train_data,test_data = obj.initiate_data_ingestion()
 
-    print(train_data,test_data)
-
     data_transformation = DataTransformation()
-    data_transformation.initiate_data_transformation(train_data, test_data)
+    train_arr, test_arr, _ = data_transformation.initiate_data_transformation(train_data, test_data)
+
+    modeltrainer = ModelTrainer()
+    print(modeltrainer.initiate_model_trainer(train_arr, test_arr))
 
 
 
