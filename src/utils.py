@@ -10,7 +10,8 @@ from sklearn.model_selection import GridSearchCV       # for using different hyp
 from src.exception import CustomException
 
 
-def save_object(file_path, obj):       # Save an object 'obj' to location with file name defined in 'file_path'
+# To Save an object 'obj' to location with file name defined in 'file_path':
+def save_object(file_path, obj):       
     try:
         dir_path = os.path.dirname(file_path)       # parent folder name
 
@@ -23,7 +24,8 @@ def save_object(file_path, obj):       # Save an object 'obj' to location with f
         raise CustomException(e,sys)
 
 
-def evaluate_models(X_train, y_train, X_test, y_test, models, params):      # Train model on train dataset, then evaluate model performance (R2-Score) in test dataset
+# To Train model on train dataset, then evaluate model performance (R2-Score) in test dataset:
+def evaluate_models(X_train, y_train, X_test, y_test, models, params):      
     try:
         report = {}         # Dictionary of all model's R2-score performance
 
@@ -55,5 +57,12 @@ def evaluate_models(X_train, y_train, X_test, y_test, models, params):      # Tr
 
 
 
-
+# To load 'PKL' or any file:
+def load_object(file_path):
+    try:
+        with open(file_path, "rb") as file_obj:
+            return dill.load(file_obj)
+    
+    except Exception as e:
+        raise CustomException(e,sys)
 
