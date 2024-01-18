@@ -16,7 +16,7 @@ app = application
 def index():
     return render_template('index.html')
 
-@app.route('/predictdata', methods=['GET', 'POST'])
+@app.route('/predictdata', methods=['GET', 'POST'])     # /predictdata is the main home page
 def predict_datapoint():
     if request.method=='GET':
         return render_template('home.html')       # home.html : page which has input fields to feed input data to predict
@@ -35,13 +35,14 @@ def predict_datapoint():
         pred_df = data.get_data_as_data_frame()   # convert the data into DataFrame
         print(pred_df)
 
-        predict_pipeline = PredictPipeline()
-        results = predict_pipeline.predict(pred_df)
+        predict_pipeline = PredictPipeline()            # load PredictPipeline object
+        results = predict_pipeline.predict(pred_df)     # data prediction 
 
-        return render_template('home.html', results=results[0])
+        return render_template('home.html', results=results[0])     # return to the home.html to show results there
 
 
 
+# RUN the APP:
 if __name__=="__main__":
     app.run(host="0.0.0.0", debug=True)         # maps to "127.0.0.1:5000"
 

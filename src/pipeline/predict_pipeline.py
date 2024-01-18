@@ -11,14 +11,14 @@ class PredictPipeline:
 
     def predict(self, features):
         try:
-            model_path = 'artifacts/model.pkl'
-            preprocessor_path = 'artifacts/preprocessor.pkl'
+            model_path = 'artifacts/model.pkl'                      # Model path
+            preprocessor_path = 'artifacts/preprocessor.pkl'        # Preprocessor (data transformers) object path
 
-            model = load_object(file_path = model_path)
-            preprocessor = load_object(file_path = preprocessor_path)
+            model = load_object(file_path = model_path)             # load model: using 'load_object' function (defined in 'utils.py')
+            preprocessor = load_object(file_path = preprocessor_path)   # load preprocessor
 
-            data_scaled = preprocessor.transform(features)
-            preds = model.predict(data_scaled)
+            data_scaled = preprocessor.transform(features)      # *Apply Preprocessor (data transformers) to input data
+            preds = model.predict(data_scaled)                  # Predict
 
             return preds
 
@@ -44,7 +44,7 @@ class CustomData:       # for mapping all the inputs given in the html page to t
         self.reading_score = reading_score
         self.writing_score = writing_score
 
-    def get_data_as_data_frame(self):
+    def get_data_as_data_frame(self):           # Convert input data into Pandas DataFrame
         try:
             custom_data_input_dict = {
                 "gender": [self.gender],
